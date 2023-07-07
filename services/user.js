@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import { createElement } from 'react'
 
 let users = []
 
