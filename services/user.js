@@ -3,7 +3,7 @@ import { createElement } from 'react'
 
 let users = []
 
-const SECRET = process.env.JWT_SECRET
+const SECRET = process.env.PORT || JWT_SECRET
 
 function createToken(user) {
   return jwt.sign({ email: user.email, name: user.name }, SECRET)
