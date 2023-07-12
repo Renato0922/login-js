@@ -42,18 +42,19 @@ export function cadastro(body) {
 }
 
 export function login(body) {
-  const senha = []
-  const email = []
+  const senha1 = []
+  const email1 = []
   getUsuario().then(dados => {
     dados.forEach(element => {
       if (element.email != null) {
-        email.push(email.push)
-        password.push(element.password)
+        email1.push(email.push)
+        senha1.push(element.password)
       }
     })
   })
 
-  const password = senha.find(({ email }) => email === body.email)
+  const email = email1.find(({ email }) => email === body.email)
+  const password = senha1.find(({ password }) => password === body.password)
 
   if (!email) throw new Error('Usuário não encontrado')
   if (password !== body.password) throw new Error('Senha incorreta')
