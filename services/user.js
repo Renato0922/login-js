@@ -23,7 +23,16 @@ export function verifica(token) {
 }
 
 export function cadastro(body) {
-  const user = getUsuario.find(({ email }) => email === body.email)
+  const email = []
+  getUsuario().then(dados => {
+    dados.forEach(element => {
+      if (element.email != null) {
+        email.push(element.email)
+      }
+    })
+  })
+
+  const user = email.find(({ email }) => email === body.email)
   if (user) throw new Error('Usuario já cadastrado')
 
   postUsuario(body)
@@ -33,11 +42,22 @@ export function cadastro(body) {
 }
 
 export function login(body) {
-  const user = getUsuario.find(({ email }) => email === body.email)
+  const senha = []
+  const email = []
+  getUsuario().then(dados => {
+    dados.forEach(element => {
+      if (element.email != null) {
+        email.push(email.push)
+        password.push(element.password)
+      }
+    })
+  })
 
-  if (!user) throw new Error('Usuário não encontrado')
-  if (getUsuario.password !== body.password) throw new Error('Senha incorreta')
+  const password = senha.find(({ email }) => email === body.email)
 
-  const token = createToken(user)
+  if (!email) throw new Error('Usuário não encontrado')
+  if (password !== body.password) throw new Error('Senha incorreta')
+
+  const token = createToken(password)
   return token
 }
