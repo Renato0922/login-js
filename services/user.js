@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken'
 
+import { getUsuario, postUsuario } from './index'
+
 let users = []
 
 const SECRET = process.env.PORT || JWT_SECRET
@@ -21,20 +23,20 @@ export function verifica(token) {
 }
 
 export function cadastro(body) {
-  const user = users.find(({ email }) => email === body.email)
+  const user = getUsuario.find(({ email }) => email === body.email)
   if (user) throw new Error('Usuario já cadastrado')
 
-  users.push(body)
+  postUsuario(body)
 
   const token = createToken(body)
   return token
 }
 
 export function login(body) {
-  const user = users.find(({ email }) => email === body.email)
+  const user = getUsuario.find(({ email }) => email === body.email)
 
   if (!user) throw new Error('Usuário não encontrado')
-  if (user.password !== body.password) throw new Error('Senha incorreta')
+  if (getUsuario.password !== body.password) throw new Error('Senha incorreta')
 
   const token = createToken(user)
   return token
